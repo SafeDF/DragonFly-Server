@@ -40,7 +40,7 @@ def get_env_variable(var_name):
 SECRET_KEY = get_env_variable('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = get_env_variable('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -92,8 +92,12 @@ WSGI_APPLICATION = 'dragonFly_server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE'    : 'django.db.backends.mysql',
+        'NAME'      : get_env_variable('DB_NAME'),
+        'USER'      : get_env_variable('DB_USER'),
+        'PASSWORD'  : get_env_variable('DB_PASSWORD'),
+        'HOST'      : get_env_variable('DB_HOST'),
+        'PORT'      : get_env_variable('DB_PORT'),
     }
 }
 
@@ -122,11 +126,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
